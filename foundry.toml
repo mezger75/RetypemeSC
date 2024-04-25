@@ -10,6 +10,7 @@ remappings = ["@openzeppelin/=node_modules/@openzeppelin/contracts",]
 
 [rpc_endpoints]
 blast_sepolia = "${BLAST_SEPOLIA_RPC_URL}"
+amoy_polygon = "${AMOY_POLYGON_RPC_URL}"
 
 [etherscan]
 sepolia = { key = "${ETHERSCAN_API_KEY}" }
