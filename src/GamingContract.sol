@@ -45,11 +45,7 @@ contract GamingContract is IGamingContract {
     mapping(uint256 => GameSession) public gameSessions;
 
     event GameStarted(uint256 indexed sessionId);
-    event GameEnded(
-        uint256 indexed sessionId,
-        address winner,
-        uint256 winnings
-    );
+    event GameEnded(uint256 indexed sessionId, address winner, uint256 winnings);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the owner");
@@ -72,10 +68,7 @@ contract GamingContract is IGamingContract {
 
     function getMinDeposit(address _user) external view returns (uint256) {
         // if there is no enough balance, show min amount to deposit to be able to play a game
-        return
-            fixedDepositAmount > inGameUserBalances[_user]
-                ? fixedDepositAmount - inGameUserBalances[_user]
-                : 0;
+        return fixedDepositAmount > inGameUserBalances[_user] ? fixedDepositAmount - inGameUserBalances[_user] : 0;
     }
 
     function isEnoughBalance(address _user) external view returns (bool) {
@@ -95,22 +88,12 @@ contract GamingContract is IGamingContract {
         }
         // Proceed with existing checks
         require(
-            gameSessions[_sessionId].players.length == 0 ||
-                gameSessions[_sessionId].players[0] != msg.sender,
+            gameSessions[_sessionId].players.length == 0 || gameSessions[_sessionId].players[0] != msg.sender,
             "Player already in the game"
         );
-        require(
-            gameSessions[_sessionId].players.length < DUEL_PLAYERS_COUNT,
-            "Game session is full"
-        );
-        require(
-            gameSessions[_sessionId].status == GameStatus.NOT_STARTED,
-            "Game session already started"
-        );
-        require(
-            inGameUserBalances[msg.sender] >= fixedDepositAmount,
-            "Insufficient balance"
-        );
+        require(gameSessions[_sessionId].players.length < DUEL_PLAYERS_COUNT, "Game session is full");
+        require(gameSessions[_sessionId].status == GameStatus.NOT_STARTED, "Game session already started");
+        require(inGameUserBalances[msg.sender] >= fixedDepositAmount, "Insufficient balance");
 
         // Lock sender balance
         inGameUserBalances[msg.sender] -= fixedDepositAmount;
@@ -129,14 +112,8 @@ contract GamingContract is IGamingContract {
     function endGame(uint256 _sessionId, address _winner) external onlyOwner {
         GameSession storage session = gameSessions[_sessionId];
         // check if the game is started state
-        require(
-            session.status == GameStatus.STARTED,
-            "Game not started or already ended"
-        );
-        require(
-            session.players.length == DUEL_PLAYERS_COUNT,
-            "Wrong number of players in the game session"
-        );
+        require(session.status == GameStatus.STARTED, "Game not started or already ended");
+        require(session.players.length == DUEL_PLAYERS_COUNT, "Wrong number of players in the game session");
         require(
             _winner == session.players[0] || _winner == session.players[1],
             "This address can't be the winner. It is not in the current game session."
@@ -179,19 +156,12 @@ contract GamingContract is IGamingContract {
         payable(owner).transfer(totalCommission); // THEN TRANSFER
     }
 
-    function changeCommissionRate(
-        uint256 _newCommissionRate
-    ) external onlyOwner {
-        require(
-            _newCommissionRate >= 0 && _newCommissionRate < 100,
-            "Enter valid number"
-        );
+    function changeCommissionRate(uint256 _newCommissionRate) external onlyOwner {
+        require(_newCommissionRate >= 0 && _newCommissionRate < 100, "Enter valid number");
         commissionRate = _newCommissionRate;
     }
 
-    function changeFixedDepositAmount(
-        uint256 _newFixedDepositAmount
-    ) external onlyOwner {
+    function changeFixedDepositAmount(uint256 _newFixedDepositAmount) external onlyOwner {
         require(_newFixedDepositAmount > 0, "Enter valid number");
         fixedDepositAmount = _newFixedDepositAmount;
     }
