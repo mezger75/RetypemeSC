@@ -16,3 +16,5 @@ docs/
 # intellij idea
 .idea/
 *.iml
+src/main
+target
