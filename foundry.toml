@@ -9,6 +9,7 @@ optimizer_runs = 2000
 remappings = ["@openzeppelin/=node_modules/@openzeppelin/contracts",]
 
 [rpc_endpoints]
+opbnb_testnet = "${OPBNB_TESTNET_RPC}"
 polygon_amoy = "${POLYGON_AMOY_RPC_URL}"
 blast_sepolia = "${BLAST_SEPOLIA_RPC_URL}"
 scroll_sepolia = "${SCROLL_SEPOLIA_RPC_URL}"
