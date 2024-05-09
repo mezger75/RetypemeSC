@@ -3,6 +3,7 @@ SHELL := /bin/bash
 
 # RPC URLs and other constants
 RPC_URL_POLYGON := polygon_amoy
+RPC_URL_OPBNB := opbnb_testnet
 RPC_URL_SCROLL := scroll_sepolia
 RPC_URL_BLAST := blast_sepolia
 RPC_URL_ETHEREUM := ethereum_sepolia
@@ -25,6 +26,9 @@ deploy: deploy-polygon deploy-scroll deploy-blast deploy-ethereum
 
 deploy-polygon:
 	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_POLYGON) --broadcast -vvv
+
+deploy-bnb:
+	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_OPBNB) --broadcast -vvv
 
 deploy-scroll:
 	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_SCROLL) --broadcast -vvv
