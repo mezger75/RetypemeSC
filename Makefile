@@ -29,7 +29,7 @@ deploy-polygon:
 
 # if gas price is not enough, increase it by one order
 deploy-opbnb:
-	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_OPBNB) --evm-version paris --gas-price 280000 --broadcast -vvv
+	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_OPBNB) --evm-version paris --gas-price 2800000000 --broadcast -vvv
 
 deploy-scroll:
 	forge script $(SCRIPT_PATH) --rpc-url $(RPC_URL_SCROLL) --broadcast -vvv
