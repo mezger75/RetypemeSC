@@ -2,7 +2,7 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-solc_version = "0.8.24"
+solc_version = "0.8.20"
 evm_version = "shanghai"
 optimizer = true
 optimizer_runs = 2000
@@ -13,6 +13,7 @@ opbnb_testnet = "${OPBNB_TESTNET_RPC}"
 polygon_amoy = "${POLYGON_AMOY_RPC_URL}"
 blast_sepolia = "${BLAST_SEPOLIA_RPC_URL}"
 scroll_sepolia = "${SCROLL_SEPOLIA_RPC_URL}"
+base_sepolia = "${BASE_SEPOLIA_RPC_URL}"
 ethereum_sepolia = "${ETHEREUM_SEPOLIA_RPC_URL}"
 
 #[etherscan]
