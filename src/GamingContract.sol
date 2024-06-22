@@ -52,8 +52,8 @@ contract GamingContract is IGamingContract {
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _owner) {
+        owner = _owner;
         commissionRate = 20;
         fixedDepositAmount = 0.001 ether;
     }
